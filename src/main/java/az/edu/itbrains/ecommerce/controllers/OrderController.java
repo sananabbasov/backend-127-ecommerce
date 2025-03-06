@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 public class OrderController {
 
-    @GetMapping("/order")
-    public String order(){
-        return "index.html";
+    @GetMapping("/order/user")
+    public String test(){
+        return "order.html";
     }
 }
