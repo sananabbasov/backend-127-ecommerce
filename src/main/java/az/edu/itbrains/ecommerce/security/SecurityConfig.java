@@ -1,8 +1,10 @@
 package az.edu.itbrains.ecommerce.security;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,6 +14,9 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+
+    @Autowired
+    private CustomUserDetailService userDetailService;
 
 
     @Bean
@@ -25,7 +30,7 @@ public class SecurityConfig {
         http
                 .csrf(c->c.disable())
                 .authorizeHttpRequests((request) -> {
-                    request.requestMatchers("/contact").authenticated();
+                    request.requestMatchers("/dashboard/**").authenticated();
                     request.anyRequest().permitAll();
                 })
                 .formLogin((form) ->{
@@ -37,5 +42,10 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+    public void configure(AuthenticationManagerBuilder auth) throws Exception{
+        auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
+    }
+
 
 }

@@ -1,6 +1,8 @@
 package az.edu.itbrains.ecommerce.services.impls;
 
+import az.edu.itbrains.ecommerce.dtos.category.CategoryDashboardDto;
 import az.edu.itbrains.ecommerce.dtos.category.CategoryHomeDto;
+import az.edu.itbrains.ecommerce.dtos.category.CategoryUpdateDto;
 import az.edu.itbrains.ecommerce.models.Category;
 import az.edu.itbrains.ecommerce.repositories.CategoryRepository;
 import az.edu.itbrains.ecommerce.services.CategoryService;
@@ -33,5 +35,20 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         return categories;
+    }
+
+    @Override
+    public List<CategoryDashboardDto> getDashboardCategories() {
+        return null;
+    }
+
+    @Override
+    public CategoryUpdateDto getUpdatedCategory(Long id) {
+        return null;
+    }
+
+    @Override
+    public void updateCategory(Long id, CategoryUpdateDto categoryUpdateDto) {
+
     }
 }
