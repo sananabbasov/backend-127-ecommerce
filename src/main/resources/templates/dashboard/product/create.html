@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{/dashboard/layout}">
+<head>
+  <title>Page Title Goes Here</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+    </div>
+    <div class="card-body">
+      <form  th:object="${productCreateDto}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <input th:field="*{name}"  type="text" placeholder="Name" class="form-control" />
+          <span class="text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </div>
+        <div class="form-group">
+          <input th:field="*{price}"  type="number" placeholder="price" class="form-control" />
+          <span class="text text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+        </div>
+        <div class="form-group">
+          <input th:field="*{priceDiscount}"  type="number" placeholder="priceDiscount" class="form-control" />
+          <span class="text text-danger" th:if="${#fields.hasErrors('priceDiscount')}" th:errors="*{priceDiscount}"></span>
+        </div>
+        <div class="form-group">
+          <input th:field="*{quantity}"  type="number" placeholder="quantity" class="form-control" />
+          <span class="text text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="featured">Featured</label>
+          <input id="featured" th:field="*{featured}"  type="checkbox" placeholder="featured" />
+          <span class="text text-danger" th:if="${#fields.hasErrors('featured')}" th:errors="*{featured}"></span>
+        </div>
+
+        <div class="form-group">
+          <input id="image" name="files" type="file" class="form-control d-none" multiple />
+          <label for="image" class="upload-label">
+            <i class="fas fa-cloud-upload-alt mr-2"></i>
+            <span>Choose a file or drag it here</span>
+          </label>
+        </div>
+
+
+        <div class="form-group">
+          <textarea rows="5" th:field="*{shortDescription}"  type="text" placeholder="Short description" class="form-control" ></textarea>
+          <span class="text text-danger" th:if="${#fields.hasErrors('shortDescription')}" th:errors="*{shortDescription}"></span>
+        </div>
+
+        <div class="form-group">
+          <textarea rows="10" th:field="*{description}"  type="text" placeholder="Description" class="form-control" ></textarea>
+          <span class="text text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" th:field="*{categoryId}">
+            <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}">Telefonlar</option>
+          </select>
+          <span class="text text-danger" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}"></span>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" value="Create" class="btn btn-success" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  <script>
+						CKEDITOR.replace( 'description' );
+  </script>
+</div>
+</body>
+</html>

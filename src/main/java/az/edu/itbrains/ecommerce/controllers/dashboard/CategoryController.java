@@ -23,7 +23,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
 
-    @GetMapping("/category")
+    @GetMapping("/dashboard/category")
     public String index(Model model){
         List<CategoryDashboardDto> categoryDashboardDtoList = categoryService.getDashboardCategories();
         model.addAttribute("categories", categoryDashboardDtoList);
@@ -31,22 +31,23 @@ public class CategoryController {
     }
 
 
-    @GetMapping("/category/create")
+    @GetMapping("/dashboard/category/create")
     public String create(Model model){
-        model.addAttribute("registerDto", new CategoryCreateDto());
+        model.addAttribute("categoryDto", new CategoryCreateDto());
         return "/dashboard/category/create.html";
     }
 
 
-    @PostMapping("/category/create")
+    @PostMapping("/dashboard/category/create")
     public String create(@Valid CategoryCreateDto categoryCreateDto, BindingResult result){
         if (result.hasErrors()){
             return "/dashboard/category/create.html";
         }
-        return "redirect:/category";
+        categoryService.createCategory(categoryCreateDto);
+        return "redirect:/dashboard/category";
     }
 
-    @GetMapping("/category/edit/{id}")
+    @GetMapping("/dashboard/category/edit/{id}")
     public String update(@PathVariable Long id, Model model){
         CategoryUpdateDto categoryUpdateDto = categoryService.getUpdatedCategory(id);
         model.addAttribute("category", categoryUpdateDto);
@@ -54,12 +55,12 @@ public class CategoryController {
     }
 
 
-    @PostMapping("/category/edit/{id}")
+    @PostMapping("/dashboard/category/edit/{id}")
     public String update(@PathVariable Long id, @Valid CategoryUpdateDto categoryUpdateDto, BindingResult result){
         if (result.hasErrors()){
             return "/dashboard/category/update.html";
         }
         categoryService.updateCategory(id, categoryUpdateDto);
-        return "redirect:/category";
+        return "redirect:/dashboard/category";
     }
 }

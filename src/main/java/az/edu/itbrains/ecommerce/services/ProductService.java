@@ -1,10 +1,7 @@
 package az.edu.itbrains.ecommerce.services;
 
 
-import az.edu.itbrains.ecommerce.dtos.product.ProductDetailDto;
-import az.edu.itbrains.ecommerce.dtos.product.ProductHomeFeaturedDto;
-import az.edu.itbrains.ecommerce.dtos.product.ProductHomeRecentDto;
-import az.edu.itbrains.ecommerce.dtos.product.ProductRelatedDto;
+import az.edu.itbrains.ecommerce.dtos.product.*;
 
 import java.util.List;
 
@@ -13,4 +10,12 @@ public interface ProductService {
     ProductDetailDto getDetailProductById(Long id);
     List<ProductHomeRecentDto>  getHomeRecentProducts();
     List<ProductRelatedDto> getRelatedProducts(Long id);
+
+    List<ProductDashboardDto> getDashboardCategories();
+
+    void createProduct(ProductCreateDto productCreateDto);
+
+    ProductUpdateDto getUpdatedProduct(Long id);
+
+    void updateProduct(Long id, ProductUpdateDto productUpdateDto);
 }

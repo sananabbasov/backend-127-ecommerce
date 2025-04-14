@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{/dashboard/layout}">
 <head>
   <title>Page Title Goes Here</title>
 </head>
   <body>
     <div layout:fragment="content">
-
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+          </div>
+          <div class="card-body">
+            <form method="post">
+              <div class="form-group">
+                <input th:value="${category.name}" name="name" type="text" placeholder="Name" class="form-control" />
+              </div>
+              <div class="form-group">
+                <input th:value="${category.photoUrl}" name="photoUrl" type="text" placeholder="Photo url" class="form-control" />
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-warning" />
+              </div>
+            </form>
+          </div>
+        </div>
     </div>
   </body>
 </html>
