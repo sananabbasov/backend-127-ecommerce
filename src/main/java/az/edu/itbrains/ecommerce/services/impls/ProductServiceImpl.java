@@ -106,4 +106,9 @@ public class ProductServiceImpl implements ProductService {
     public void updateProduct(Long id, ProductUpdateDto productUpdateDto) {
 
     }
+
+    @Override
+    public Product findProductById(Long productId) {
+        return productRepository.findById(productId).orElseThrow();
+    }
 }
